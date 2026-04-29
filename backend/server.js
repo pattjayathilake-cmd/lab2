@@ -19,15 +19,14 @@ app.use("/api/items", itemRoutes);
 
 const PORT = process.env.PORT || 5001;
 
-mongoose
-  .connect(process.env.MONGO_URI)
+mongoose.connect(process.env.MONGO_URI)
   .then(() => {
     console.log("MongoDB connected");
-    app.listen(PORT, () => {
-      console.log(`Server running on port ${PORT}`);
-    });
   })
-  .catch((error) => {
-    console.error("Database connection error:", error.message);
-    process.exit(1);
+  .catch((err) => {
+    console.error("MongoDB error:", err.message);
   });
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
